@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="255 255 730 730" fill="none">
+  <defs>
+    <linearGradient id="cf-bar" x1="478" y1="0" x2="978" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0B7FD6"/>
+      <stop offset="1" stop-color="#14A6F0"/>
+    </linearGradient>
+  </defs>
+  <path d="M822.7 397.1 A300 300 0 1 0 822.7 842.9" stroke="#0D2D5E" stroke-width="124" stroke-linecap="round"/>
+  <rect x="478" y="504" width="500" height="80" rx="40" fill="url(#cf-bar)"/>
+  <rect x="478" y="644" width="340" height="80" rx="40" fill="url(#cf-bar)"/>
+</svg>

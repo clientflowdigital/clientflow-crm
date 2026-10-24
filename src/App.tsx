@@ -1,4 +1,15 @@
 import { CRM } from "@/components/atomic-crm/root/CRM";
+import clientFlowLogoDark from "@/assets/brand/clientflow-mark-dark.svg";
+import clientFlowLogoLight from "@/assets/brand/clientflow-mark-light.svg";
+
+// ClientFlow's pipeline: lead → contacted → proposal → won / lost.
+const clientFlowDealStages = [
+  { value: "lead", label: "Lead" },
+  { value: "contacted", label: "Contacted" },
+  { value: "proposal", label: "Proposal" },
+  { value: "won", label: "Won" },
+  { value: "lost", label: "Lost" },
+];
 
 /**
  * Application entry point
@@ -31,6 +42,13 @@ import { CRM } from "@/components/atomic-crm/root/CRM";
  *    />
  * );
  */
-const App = () => <CRM />;
+const App = () => (
+  <CRM
+    title="ClientFlow CRM"
+    darkModeLogo={clientFlowLogoDark}
+    lightModeLogo={clientFlowLogoLight}
+    dealStages={clientFlowDealStages}
+  />
+);
 
 export default App;
