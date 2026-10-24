@@ -15,7 +15,7 @@ This repo is for ClientFlow's internal use only: one company, no multi-tenancy. 
 **In:**
 
 - Contacts and companies
-- Deal pipeline: lead → contacted → proposal → won / lost
+- Sales board: new enquiry → diagnosing → proposal sent → deposit received / lost (with a lost reason)
 - Notes and follow-up reminders
 - Website leads arriving automatically from the ClientFlow v2 contact form and chatbot
 - Login for the ClientFlow team

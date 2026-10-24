@@ -48,7 +48,8 @@ export const formatMoney = (
       style: "currency",
       currency: currency || DEFAULT_DEAL_CURRENCY,
       currencyDisplay: "narrowSymbol",
-      ...(compact
+      // Compact only pays off from 1,000: "$0.00" or "$120.00" read worse than "$0".
+      ...(compact && Math.abs(amount) >= 1000
         ? { notation: "compact", minimumSignificantDigits: 3 }
         : { minimumFractionDigits: 0, maximumFractionDigits: 0 }),
     })

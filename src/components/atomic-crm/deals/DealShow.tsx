@@ -35,6 +35,7 @@ import {
   revenueTypes,
 } from "./clientflowDealOptions";
 import { findDealLabel, formatISODateString } from "./dealUtils";
+import { LOST_DEAL_STAGE } from "./stages";
 
 export const DealShow = ({ open, id }: { open: boolean; id?: string }) => {
   const redirect = useRedirect();
@@ -157,6 +158,15 @@ const DealShowContent = () => {
                   <ContactList />
                 </ReferenceArrayField>
               </div>
+            </div>
+          )}
+
+          {record.stage === LOST_DEAL_STAGE && record.lost_reason && (
+            <div className="m-4 whitespace-pre-line">
+              <span className="text-xs text-muted-foreground tracking-wide">
+                {translate("resources.deals.fields.lost_reason")}
+              </span>
+              <p className="text-sm leading-6">{record.lost_reason}</p>
             </div>
           )}
 

@@ -191,6 +191,13 @@ export const englishCrmMessages = {
         lead_source: "Lead source",
         package: "Package",
         revenue_type: "Revenue type",
+        lost_reason: "Why was this deal lost?",
+      },
+      lost_reason_dialog: {
+        title: "Why was this deal lost?",
+        description:
+          "Give a reason so the team can learn from it and follow up later.",
+        confirm: "Mark as lost",
       },
       action: {
         back_to_deal: "Back to deal",

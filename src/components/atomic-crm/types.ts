@@ -132,6 +132,7 @@ export type Deal = {
   package?: string | null;
   revenue_type?: string;
   currency?: DealCurrency;
+  lost_reason?: string | null;
 } & Pick<RaRecord, "id">;
 
 export type DealCurrency = "USD" | "ZWG";

@@ -22,6 +22,11 @@ describe("formatMoney", () => {
     expect(formatMoney(100, null)).toBe("$100");
   });
 
+  it("keeps small amounts whole in compact mode", () => {
+    expect(formatMoney(0, "USD", { compact: true })).toBe("$0");
+    expect(formatMoney(120, "USD", { compact: true })).toBe("$120");
+  });
+
   it("supports compact notation", () => {
     expect(formatMoney(12500, "ZWG", { compact: true })).toBe("ZiG\u00a012.5K");
   });

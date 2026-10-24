@@ -12,9 +12,9 @@ import type { Deal } from "../types";
 // Rough chance of winning a deal at each open ClientFlow stage, used to
 // weight the "pending" bar. Unknown stages count as 0.
 const multiplier: Record<string, number> = {
-  lead: 0.1,
-  contacted: 0.3,
-  proposal: 0.6,
+  "new-enquiry": 0.1,
+  diagnosing: 0.3,
+  "proposal-sent": 0.6,
 };
 
 const threeMonthsAgo = new Date(

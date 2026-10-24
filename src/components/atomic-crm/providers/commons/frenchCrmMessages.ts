@@ -195,6 +195,13 @@ export const frenchCrmMessages = {
         lead_source: "Source du prospect",
         package: "Formule",
         revenue_type: "Type de revenu",
+        lost_reason: "Pourquoi cette affaire a-t-elle été perdue ?",
+      },
+      lost_reason_dialog: {
+        title: "Pourquoi cette affaire a-t-elle été perdue ?",
+        description:
+          "Indiquez une raison pour que les managers comprennent ce qui n'a pas fonctionné.",
+        confirm: "Marquer comme perdue",
       },
       action: {
         back_to_deal: "Retour à l'affaire",

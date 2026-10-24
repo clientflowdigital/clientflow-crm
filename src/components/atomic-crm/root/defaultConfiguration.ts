@@ -19,12 +19,14 @@ export const defaultCompanySectors = [
   { value: "other", label: "Other" },
 ];
 
-// ClientFlow's pipeline: lead → contacted → proposal → won / lost.
+// ClientFlow's Sales board. A deal is won once the deposit is received, the
+// company's rule for starting work. "won" and "lost" keep Atomic's values,
+// which the dashboard and pipeline settings rely on.
 export const defaultDealStages = [
-  { value: "lead", label: "Lead" },
-  { value: "contacted", label: "Contacted" },
-  { value: "proposal", label: "Proposal" },
-  { value: "won", label: "Won" },
+  { value: "new-enquiry", label: "New enquiry" },
+  { value: "diagnosing", label: "Diagnosing" },
+  { value: "proposal-sent", label: "Proposal sent" },
+  { value: "won", label: "Deposit received" },
   { value: "lost", label: "Lost" },
 ];
 
