@@ -2,7 +2,7 @@
 
 A CRM built by [ClientFlow Digital](https://github.com/clientflowdigital), tailored to how a small web agency works. It also captures leads from the websites we build.
 
-> **Status:** planning. Building starts once the ClientFlow v2 website ships.
+> **Status:** early setup. The Atomic CRM base is in place. ClientFlow features start once the ClientFlow v2 website ships.
 
 ClientFlow CRM is a fork of [Atomic CRM](https://github.com/marmelab/atomic-crm) by Marmelab (MIT). Upstream is tracked as the `upstream` git remote.
 
@@ -30,7 +30,7 @@ Atomic CRM already covers contacts, companies, the deal board, tasks, notes and 
 
 ## Stack
 
-- **Frontend:** React, Vite, shadcn/ui, react-admin
+- **Frontend:** React, Vite, shadcn/ui, ra-core (react-admin's headless core)
 - **Backend:** Supabase (PostgreSQL, auth, storage, edge functions)
 
 Secrets live in environment variables and are never committed.
