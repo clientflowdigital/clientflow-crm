@@ -11,7 +11,7 @@ export const englishCrmMessages = {
         created_at: "Created at",
         nb_contacts: "Number of contacts",
         revenue: "Revenue",
-        sector: "Sector",
+        sector: "Industry",
         size: "Size",
         tax_identifier: "Tax Identifier",
         address: "Address",
@@ -183,10 +183,14 @@ export const englishCrmMessages = {
         description: "Description",
         company_id: "Company",
         contact_ids: "Contacts",
-        category: "Category",
+        category: "Service",
         amount: "Budget",
+        currency: "Currency",
         expected_closing_date: "Expected closing date",
         stage: "Stage",
+        lead_source: "Lead source",
+        package: "Package",
+        revenue_type: "Revenue type",
       },
       action: {
         back_to_deal: "Back to deal",
@@ -421,7 +425,7 @@ export const englishCrmMessages = {
       load_more: "Load more activity",
     },
     dashboard: {
-      deals_chart: "Upcoming Deal Revenue",
+      deals_chart: "Upcoming Deal Revenue (USD)",
       deals_pipeline: "Deals Pipeline",
       latest_activity: "Latest Activity",
       latest_activity_error: "Error loading latest activity",
@@ -511,11 +515,11 @@ export const englishCrmMessages = {
     settings: {
       about: "About",
       companies: {
-        sectors: "Sectors",
+        sectors: "Industries",
       },
       dark_mode_logo: "Dark Mode Logo",
       deals: {
-        categories: "Categories",
+        categories: "Services",
         currency: "Currency",
         pipeline_help:
           "Select which deal stages should count as pipeline deals.",
@@ -545,7 +549,7 @@ export const englishCrmMessages = {
           "Cannot remove %{display_name} that are still used by deals: %{items}",
         validating: "Validating\u2026",
         entities: {
-          categories: "categories",
+          categories: "services",
           stages: "stages",
         },
       },

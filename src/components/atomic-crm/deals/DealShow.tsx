@@ -27,6 +27,13 @@ import { NotesIterator } from "../notes/NotesIterator";
 import { useConfigurationContext } from "../root/ConfigurationContext";
 import type { Deal } from "../types";
 import { ContactList } from "./ContactList";
+import {
+  dealPackages,
+  findOptionLabel,
+  formatMoney,
+  leadSources,
+  revenueTypes,
+} from "./clientflowDealOptions";
 import { findDealLabel, formatISODateString } from "./dealUtils";
 
 export const DealShow = ({ open, id }: { open: boolean; id?: string }) => {
@@ -50,7 +57,7 @@ export const DealShow = ({ open, id }: { open: boolean; id?: string }) => {
 
 const DealShowContent = () => {
   const translate = useTranslate();
-  const { dealStages, dealCategories, currency } = useConfigurationContext();
+  const { dealStages, dealCategories } = useConfigurationContext();
   const record = useRecordContext<Deal>();
   if (!record) return null;
 
@@ -109,13 +116,7 @@ const DealShowContent = () => {
                 {translate("resources.deals.fields.amount")}
               </span>
               <span className="text-sm">
-                {record.amount.toLocaleString("en-US", {
-                  notation: "compact",
-                  style: "currency",
-                  currency,
-                  currencyDisplay: "narrowSymbol",
-                  minimumSignificantDigits: 3,
-                })}
+                {formatMoney(record.amount, record.currency)}
               </span>
             </div>
 
@@ -140,6 +141,8 @@ const DealShowContent = () => {
               </span>
             </div>
           </div>
+
+          <DealClientFlowFields record={record} />
 
           {!!record.contact_ids?.length && (
             <div className="m-4">
@@ -280,5 +283,34 @@ const UnarchiveButton = ({ record }: { record: Deal }) => {
       <ArchiveRestore className="w-4 h-4" />
       {translate("resources.deals.unarchived.action")}
     </Button>
+  );
+};
+
+const DealClientFlowFields = ({ record }: { record: Deal }) => {
+  const translate = useTranslate();
+  const fields = [
+    { source: "package", value: findOptionLabel(dealPackages, record.package) },
+    {
+      source: "lead_source",
+      value: findOptionLabel(leadSources, record.lead_source),
+    },
+    {
+      source: "revenue_type",
+      value: findOptionLabel(revenueTypes, record.revenue_type),
+    },
+  ].filter((field) => field.value);
+  if (!fields.length) return null;
+
+  return (
+    <div className="flex gap-8 m-4">
+      {fields.map((field) => (
+        <div key={field.source} className="flex flex-col mr-10">
+          <span className="text-xs text-muted-foreground tracking-wide">
+            {translate(`resources.deals.fields.${field.source}`)}
+          </span>
+          <span className="text-sm">{field.value}</span>
+        </div>
+      ))}
+    </div>
   );
 };

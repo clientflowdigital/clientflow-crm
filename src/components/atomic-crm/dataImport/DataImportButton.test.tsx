@@ -131,7 +131,7 @@ describe("DataImportButton", () => {
     const { dataProvider, screen } = await renderImport(useCompanyImport, [
       {
         name: "Acme",
-        sector: "Information Technology",
+        sector: "Professional Services",
         size: 50,
         city: "New York",
         website: "https://acme.example",
@@ -147,7 +147,7 @@ describe("DataImportButton", () => {
     expect(companies[0]).toMatchObject({
       city: "New York",
       name: "Acme",
-      sector: "information-technology",
+      sector: "professional-services",
       // 50 employees falls in the "50-249 employees" bucket
       size: 250,
       website: "https://acme.example",
@@ -198,7 +198,7 @@ describe("DataImportButton", () => {
       {
         name: "New website",
         company: "Acme",
-        category: "Website design",
+        category: "Website Care & Hosting",
         stage: "Proposal",
         amount: "12000",
         expected_closing_date: "2026-09-30",
@@ -217,7 +217,7 @@ describe("DataImportButton", () => {
     expect(deals).toHaveLength(2);
     expect(deals[0]).toMatchObject({
       amount: 12000,
-      category: "website-design",
+      category: "care-hosting",
       company_id: companies[0].id,
       name: "New website",
       stage: "proposal",

@@ -12,6 +12,13 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { contactOptionText } from "../misc/ContactOption";
 import { useConfigurationContext } from "../root/ConfigurationContext";
 import { AutocompleteCompanyInput } from "../companies/AutocompleteCompanyInput.tsx";
+import {
+  DEFAULT_DEAL_CURRENCY,
+  dealCurrencies,
+  dealPackages,
+  leadSources,
+  revenueTypes,
+} from "./clientflowDealOptions";
 
 export const DealInputs = () => {
   const isMobile = useIsMobile();
@@ -79,9 +86,45 @@ const DealMiscInputs = () => {
         optionValue="value"
         helperText={false}
       />
-      <NumberInput
-        source="amount"
-        defaultValue={0}
+      <SelectInput
+        source="package"
+        choices={dealPackages}
+        optionText="label"
+        optionValue="value"
+        helperText={false}
+      />
+      <SelectInput
+        source="lead_source"
+        choices={leadSources}
+        optionText="label"
+        optionValue="value"
+        helperText={false}
+      />
+      <div className="flex gap-4">
+        <NumberInput
+          source="amount"
+          defaultValue={0}
+          helperText={false}
+          validate={required()}
+          className="flex-1"
+        />
+        <SelectInput
+          source="currency"
+          choices={dealCurrencies}
+          optionText="label"
+          optionValue="value"
+          defaultValue={DEFAULT_DEAL_CURRENCY}
+          helperText={false}
+          validate={required()}
+          className="w-28"
+        />
+      </div>
+      <SelectInput
+        source="revenue_type"
+        choices={revenueTypes}
+        optionText="label"
+        optionValue="value"
+        defaultValue="one-time"
         helperText={false}
         validate={required()}
       />

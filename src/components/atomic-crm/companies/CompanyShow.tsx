@@ -25,6 +25,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { ActivityLog } from "../activity/ActivityLog";
 import { Avatar } from "../contacts/Avatar";
 import { TagsList } from "../contacts/TagsList";
+import { formatMoney } from "../deals/clientflowDealOptions";
 import { findDealLabel } from "../deals/dealUtils";
 import { MobileContent } from "../layout/MobileContent";
 import MobileHeader from "../layout/MobileHeader";
@@ -264,7 +265,7 @@ const DealsIterator = () => {
   const translate = useTranslate();
   const [locale = "en"] = useLocaleState();
   const { data: deals, error, isPending } = useListContext<Deal>();
-  const { dealStages, dealCategories, currency } = useConfigurationContext();
+  const { dealStages, dealCategories } = useConfigurationContext();
   if (isPending || error) return null;
   return (
     <div>
@@ -279,13 +280,7 @@ const DealsIterator = () => {
                 <div className="font-medium">{deal.name}</div>
                 <div className="text-sm text-muted-foreground">
                   {findDealLabel(dealStages, deal.stage)},{" "}
-                  {deal.amount.toLocaleString("en-US", {
-                    notation: "compact",
-                    style: "currency",
-                    currency,
-                    currencyDisplay: "narrowSymbol",
-                    minimumSignificantDigits: 3,
-                  })}
+                  {formatMoney(deal.amount, deal.currency, { compact: true })}
                   {deal.category
                     ? `, ${dealCategories.find((c) => c.value === deal.category)?.label ?? deal.category}`
                     : ""}

@@ -12,18 +12,11 @@ export const defaultCurrency = "USD";
 
 export const defaultTitle = "ClientFlow CRM";
 
+// Industries ClientFlow serves. Neo can add more in Settings.
 export const defaultCompanySectors = [
-  { value: "communication-services", label: "Communication Services" },
-  { value: "consumer-discretionary", label: "Consumer Discretionary" },
-  { value: "consumer-staples", label: "Consumer Staples" },
-  { value: "energy", label: "Energy" },
-  { value: "financials", label: "Financials" },
-  { value: "health-care", label: "Health Care" },
-  { value: "industrials", label: "Industrials" },
-  { value: "information-technology", label: "Information Technology" },
-  { value: "materials", label: "Materials" },
-  { value: "real-estate", label: "Real Estate" },
-  { value: "utilities", label: "Utilities" },
+  { value: "construction", label: "Construction" },
+  { value: "professional-services", label: "Professional Services" },
+  { value: "other", label: "Other" },
 ];
 
 // ClientFlow's pipeline: lead → contacted → proposal → won / lost.
@@ -37,12 +30,19 @@ export const defaultDealStages = [
 
 export const defaultDealPipelineStatuses = ["won"];
 
+// ClientFlow's services, from the company profile. Shown as "Service".
 export const defaultDealCategories = [
-  { value: "other", label: "Other" },
-  { value: "copywriting", label: "Copywriting" },
-  { value: "print-project", label: "Print project" },
-  { value: "ui-design", label: "UI Design" },
-  { value: "website-design", label: "Website design" },
+  { value: "website", label: "Website" },
+  { value: "brand-strategy", label: "Brand Strategy" },
+  { value: "digital-growth-audit", label: "Digital Growth Audit" },
+  { value: "paid-ads", label: "Paid Ads" },
+  { value: "care-hosting", label: "Website Care & Hosting" },
+  { value: "whatsapp-lead-capture", label: "WhatsApp Lead Capture" },
+  { value: "ai-automation", label: "AI Automation" },
+  { value: "custom-software", label: "Custom Software" },
+  { value: "content-video", label: "Content & Video" },
+  { value: "youtube", label: "YouTube" },
+  { value: "seo-google-business", label: "SEO & Google Business" },
 ];
 
 export const defaultNoteStatuses = [
@@ -54,14 +54,15 @@ export const defaultNoteStatuses = [
 
 export const defaultTaskTypes = [
   { value: "none", label: "None" },
-  { value: "email", label: "Email" },
-  { value: "demo", label: "Demo" },
-  { value: "lunch", label: "Lunch" },
-  { value: "meeting", label: "Meeting" },
-  { value: "follow-up", label: "Follow-up" },
-  { value: "thank-you", label: "Thank you" },
-  { value: "ship", label: "Ship" },
   { value: "call", label: "Call" },
+  { value: "whatsapp", label: "WhatsApp" },
+  { value: "email", label: "Email" },
+  { value: "meeting", label: "Meeting" },
+  { value: "discovery-call", label: "Discovery call" },
+  { value: "send-proposal", label: "Send proposal" },
+  { value: "collect-content", label: "Collect content" },
+  { value: "payment-follow-up", label: "Payment follow-up" },
+  { value: "qa-check", label: "QA check" },
 ];
 
 export const defaultConfiguration: ConfigurationContextValue = {

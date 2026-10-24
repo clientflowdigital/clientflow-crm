@@ -128,7 +128,13 @@ export type Deal = {
   expected_closing_date: string;
   sales_id: Identifier;
   index: number;
+  lead_source?: string | null;
+  package?: string | null;
+  revenue_type?: string;
+  currency?: DealCurrency;
 } & Pick<RaRecord, "id">;
+
+export type DealCurrency = "USD" | "ZWG";
 
 export type DealNote = {
   deal_id: Identifier;

@@ -76,7 +76,13 @@ create table public.deals (
     archived_at timestamp with time zone,
     expected_closing_date date,
     sales_id bigint,
-    index smallint
+    index smallint,
+    lead_source text,
+    package text,
+    revenue_type text not null default 'one-time',
+    currency text not null default 'USD',
+    constraint deals_revenue_type_check check (revenue_type in ('one-time', 'recurring')),
+    constraint deals_currency_check check (currency in ('USD', 'ZWG'))
 );
 
 create table public.deal_notes (

@@ -4,6 +4,7 @@ import { TrendingUp } from "lucide-react";
 import { useGetList, useTranslate } from "ra-core";
 import { memo, useMemo } from "react";
 
+import { DEFAULT_DEAL_CURRENCY } from "../deals/clientflowDealOptions";
 import { findDealLabel } from "../deals/dealUtils";
 import { useConfigurationContext } from "../root/ConfigurationContext";
 import type { Deal } from "../types";
@@ -24,7 +25,7 @@ const DEFAULT_LOCALE = "en-US";
 
 export const DealsChart = memo(() => {
   const translate = useTranslate();
-  const { dealStages, currency } = useConfigurationContext();
+  const { dealStages } = useConfigurationContext();
   const acceptedLanguages = navigator
     ? navigator.languages || [navigator.language]
     : [DEFAULT_LOCALE];
@@ -43,14 +44,17 @@ export const DealsChart = memo(() => {
   });
   const months = useMemo(() => {
     if (!data) return [];
-    const dealsByMonth = data.reduce((acc, deal) => {
-      const month = startOfMonth(deal.created_at ?? new Date()).toISOString();
-      if (!acc[month]) {
-        acc[month] = [];
-      }
-      acc[month].push(deal);
-      return acc;
-    }, {} as any);
+    // USD only: ZiG amounts can't be added to USD ones.
+    const dealsByMonth = data
+      .filter((deal) => (deal.currency ?? DEFAULT_DEAL_CURRENCY) === "USD")
+      .reduce((acc, deal) => {
+        const month = startOfMonth(deal.created_at ?? new Date()).toISOString();
+        if (!acc[month]) {
+          acc[month] = [];
+        }
+        acc[month].push(deal);
+        return acc;
+      }, {} as any);
 
     const amountByMonth = Object.keys(dealsByMonth).map((month) => {
       return {
@@ -120,7 +124,7 @@ export const DealsChart = memo(() => {
               <strong>{indexValue}: </strong>&nbsp;{value > 0 ? "+" : ""}
               {value.toLocaleString(acceptedLanguages.at(0) ?? DEFAULT_LOCALE, {
                 style: "currency",
-                currency,
+                currency: "USD",
               })}
             </div>
           )}
