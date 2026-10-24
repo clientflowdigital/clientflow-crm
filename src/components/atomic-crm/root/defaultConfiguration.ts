@@ -2,15 +2,15 @@ import type { ConfigurationContextValue } from "./ConfigurationContext";
 // Import the logos as module assets so Vite resolves their URL relative to the
 // JS chunk (import.meta.url), not the current route. A plain "./logos/..." path
 // breaks on nested routes like /oauth/consent and under a deployment sub-path.
-import darkModeLogo from "./logos/logo_atomic_crm_dark.svg";
-import lightModeLogo from "./logos/logo_atomic_crm_light.svg";
+import darkModeLogo from "@/assets/brand/clientflow-mark-dark.svg";
+import lightModeLogo from "@/assets/brand/clientflow-mark-light.svg";
 
 export const defaultDarkModeLogo = darkModeLogo;
 export const defaultLightModeLogo = lightModeLogo;
 
 export const defaultCurrency = "USD";
 
-export const defaultTitle = "Atomic CRM";
+export const defaultTitle = "ClientFlow CRM";
 
 export const defaultCompanySectors = [
   { value: "communication-services", label: "Communication Services" },
@@ -26,13 +26,13 @@ export const defaultCompanySectors = [
   { value: "utilities", label: "Utilities" },
 ];
 
+// ClientFlow's pipeline: lead → contacted → proposal → won / lost.
 export const defaultDealStages = [
-  { value: "opportunity", label: "Opportunity" },
-  { value: "proposal-sent", label: "Proposal Sent" },
-  { value: "in-negociation", label: "In Negotiation" },
+  { value: "lead", label: "Lead" },
+  { value: "contacted", label: "Contacted" },
+  { value: "proposal", label: "Proposal" },
   { value: "won", label: "Won" },
   { value: "lost", label: "Lost" },
-  { value: "delayed", label: "Delayed" },
 ];
 
 export const defaultDealPipelineStatuses = ["won"];

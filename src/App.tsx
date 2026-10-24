@@ -1,15 +1,4 @@
 import { CRM } from "@/components/atomic-crm/root/CRM";
-import clientFlowLogoDark from "@/assets/brand/clientflow-mark-dark.svg";
-import clientFlowLogoLight from "@/assets/brand/clientflow-mark-light.svg";
-
-// ClientFlow's pipeline: lead → contacted → proposal → won / lost.
-const clientFlowDealStages = [
-  { value: "lead", label: "Lead" },
-  { value: "contacted", label: "Contacted" },
-  { value: "proposal", label: "Proposal" },
-  { value: "won", label: "Won" },
-  { value: "lost", label: "Lost" },
-];
 
 /**
  * Application entry point
@@ -42,13 +31,10 @@ const clientFlowDealStages = [
  *    />
  * );
  */
-const App = () => (
-  <CRM
-    title="ClientFlow CRM"
-    darkModeLogo={clientFlowLogoDark}
-    lightModeLogo={clientFlowLogoLight}
-    dealStages={clientFlowDealStages}
-  />
-);
+
+// ClientFlow's title, logos and deal stages are the defaults in
+// root/defaultConfiguration.ts, so they also apply before login.
+// Telemetry is off so the app never reports our domain to Marmelab.
+const App = () => <CRM disableTelemetry />;
 
 export default App;
