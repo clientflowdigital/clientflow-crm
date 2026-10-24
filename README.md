@@ -1,18 +1,14 @@
 # ClientFlow CRM
 
-A CRM built by [ClientFlow Digital](https://github.com/clientflowdigital), tailored to how a small web agency works. It also captures leads from the websites we build.
+ClientFlow Digital's own CRM, tailored to how we work as a small web agency. It also captures leads from the websites we build.
 
 > **Status:** in active development, starting from the Atomic CRM base.
 
 ClientFlow CRM is a fork of [Atomic CRM](https://github.com/marmelab/atomic-crm) by Marmelab (MIT). Upstream is tracked as the `upstream` git remote.
 
-## Roadmap
+## Scope
 
-1. **Internal tool:** ClientFlow uses it every day.
-2. **Pilot:** a few friendly clients, ideally ones whose websites we build.
-3. **Product:** sold more widely once the pilot shows people will pay.
-
-Each phase starts only when the one before it is working.
+This repo is for ClientFlow's internal use only: one company, no multi-tenancy. If we later sell a CRM to clients, that product will be a separate fork of this repo.
 
 ## First version scope
 
@@ -22,11 +18,11 @@ Each phase starts only when the one before it is working.
 - Deal pipeline: lead → contacted → proposal → won / lost
 - Notes and follow-up reminders
 - Website leads arriving automatically from the ClientFlow v2 contact form and chatbot
-- Login, with each company's data kept separate (multi-tenant from day one)
+- Login for the ClientFlow team
 
 **Out for now:** reports and dashboards, email sync, invoicing, mobile app, integrations marketplace.
 
-Atomic CRM already covers contacts, companies, the deal board, tasks, notes and login. The main work on top is multi-tenancy, the ClientFlow pipeline stages, website lead capture and branding.
+Atomic CRM already covers contacts, companies, the deal board, tasks, notes and login. ClientFlow branding and pipeline stages are in place. The main remaining work is website lead capture and a production setup with public signups turned off.
 
 ## Stack
 
