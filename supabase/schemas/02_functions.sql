@@ -287,6 +287,24 @@ begin
 end;
 $$;
 
+-- Marketing users (freelance partners) only see the companies assigned to
+-- them, and never deals or amounts. Used by the RLS policies.
+CREATE OR REPLACE FUNCTION "public"."is_marketing"() RETURNS boolean
+    LANGUAGE "sql" STABLE SECURITY DEFINER
+    SET "search_path" TO ''
+    AS $$
+  select exists (
+    select 1 from public.sales where user_id = auth.uid() and role = 'marketing'
+  );
+$$;
+
+CREATE OR REPLACE FUNCTION "public"."current_sales_id"() RETURNS bigint
+    LANGUAGE "sql" STABLE SECURITY DEFINER
+    SET "search_path" TO ''
+    AS $$
+  select id from public.sales where user_id = auth.uid();
+$$;
+
 CREATE OR REPLACE FUNCTION "public"."merge_contacts"("loser_id" bigint, "winner_id" bigint) RETURNS bigint
     LANGUAGE "plpgsql"
     SET "search_path" TO 'public'

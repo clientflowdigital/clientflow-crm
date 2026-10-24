@@ -4,6 +4,7 @@ import { db, type ContactsTable, CompiledQuery } from "../_shared/db.ts";
 import { corsHeaders, OptionsMiddleware } from "../_shared/cors.ts";
 import { createErrorResponse } from "../_shared/utils.ts";
 import { AuthMiddleware, UserMiddleware } from "../_shared/authentication.ts";
+import { getUserSale } from "../_shared/getUserSale.ts";
 
 type Contact = Selectable<ContactsTable>;
 
@@ -164,6 +165,12 @@ Deno.serve(async (req: Request) =>
       UserMiddleware(req, async (req, user) => {
         // Handle POST request
         if (req.method === "POST") {
+          // The merge runs with full database access, past the RLS policies,
+          // so marketing users (who only see some contacts) cannot use it.
+          const currentUserSale = await getUserSale(user);
+          if (!currentUserSale || currentUserSale.role === "marketing") {
+            return createErrorResponse(403, "Not Authorized");
+          }
           try {
             const { loserId, winnerId } = await req.json();
 

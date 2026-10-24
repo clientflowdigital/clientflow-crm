@@ -1,5 +1,6 @@
 import { email, required, useGetIdentity, useRecordContext } from "ra-core";
 import { BooleanInput } from "@/components/admin/boolean-input";
+import { SelectInput } from "@/components/admin/select-input";
 import { TextInput } from "@/components/admin/text-input";
 
 import type { Sale } from "../types";
@@ -14,6 +15,20 @@ export function SalesInputs() {
       <TextInput
         source="email"
         validate={[required(), email()]}
+        helperText={false}
+      />
+      <SelectInput
+        source="role"
+        choices={[
+          { id: "team", name: "Team: sees everything" },
+          {
+            id: "marketing",
+            name: "Marketing: assigned clients only, no deals",
+          },
+        ]}
+        defaultValue="team"
+        readOnly={record?.id === identity?.id}
+        validate={required()}
         helperText={false}
       />
       <BooleanInput

@@ -1,4 +1,9 @@
-import { useGetIdentity, useListContext, useTranslate } from "ra-core";
+import {
+  CanAccess,
+  useGetIdentity,
+  useListContext,
+  useTranslate,
+} from "ra-core";
 import { CreateButton } from "@/components/admin/create-button";
 import { ExportButton } from "@/components/admin/export-button";
 import { List } from "@/components/admin/list";
@@ -49,13 +54,17 @@ const CompanyListActions = () => {
   return (
     <TopToolbar>
       <SortButton fields={["name", "created_at", "nb_contacts"]} />
-      <DataImportButton resource="companies" />
+      <CanAccess resource="companies" action="create">
+        <DataImportButton resource="companies" />
+      </CanAccess>
       <ExportButton />
-      <CreateButton
-        label={translate("resources.companies.action.new", {
-          _: "New Company",
-        })}
-      />
+      <CanAccess resource="companies" action="create">
+        <CreateButton
+          label={translate("resources.companies.action.new", {
+            _: "New Company",
+          })}
+        />
+      </CanAccess>
     </TopToolbar>
   );
 };

@@ -27,5 +27,24 @@ export const canAccess = <
     return false;
   }
 
+  // Marketing users never see deals (they carry amounts), can't change
+  // companies, and can't delete or merge contacts. The RLS policies enforce
+  // the same rules in the database; this only hides what they can't use.
+  if (role === "marketing") {
+    if (["deals", "deal_notes"].includes(params.resource)) {
+      return false;
+    }
+    if (
+      params.resource === "companies" &&
+      params.action !== "list" &&
+      params.action !== "show"
+    ) {
+      return false;
+    }
+    if (params.resource === "contacts" && params.action === "delete") {
+      return false;
+    }
+  }
+
   return true;
 };

@@ -29,7 +29,8 @@ create table public.companies (
     description text,
     revenue text,
     tax_identifier text,
-    logo jsonb
+    logo jsonb,
+    marketer_id bigint
 );
 
 create table public.contacts (
@@ -106,7 +107,9 @@ create table public.sales (
     avatar jsonb,
     disabled boolean not null default false,
     secondary_emails jsonb not null default '[]'::jsonb,
-    constraint sales_secondary_emails_is_array check (jsonb_typeof(secondary_emails) = 'array')
+    role text not null default 'team',
+    constraint sales_secondary_emails_is_array check (jsonb_typeof(secondary_emails) = 'array'),
+    constraint sales_role_check check (role in ('team', 'marketing'))
 );
 
 create unique index uq__sales__user_id on public.sales using btree (user_id);
@@ -145,6 +148,8 @@ create table public.favicons_excluded_domains (
 
 alter table public.companies
     add constraint companies_sales_id_fkey foreign key (sales_id) references public.sales(id);
+alter table public.companies
+    add constraint companies_marketer_id_fkey foreign key (marketer_id) references public.sales(id) on delete set null;
 
 alter table public.contacts
     add constraint contacts_company_id_fkey foreign key (company_id) references public.companies(id) on update cascade on delete cascade;

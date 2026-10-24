@@ -17,6 +17,25 @@ async function updateSaleDisabled(user_id: string, disabled: boolean) {
     .eq("user_id", user_id);
 }
 
+const SALE_ROLES = ["team", "marketing"];
+
+const isValidRole = (role: unknown) =>
+  role === undefined || SALE_ROLES.includes(role as string);
+
+// Team users see everything; marketing users only see the companies assigned
+// to them, and never deals (enforced by the RLS policies).
+async function updateSaleRole(user_id: string, role?: string) {
+  if (role === undefined) return;
+  const { error } = await supabaseAdmin
+    .from("sales")
+    .update({ role })
+    .eq("user_id", user_id);
+  if (error) {
+    console.error("Error updating user role:", error);
+    throw error;
+  }
+}
+
 async function updateSaleAdministrator(
   user_id: string,
   administrator: boolean,
@@ -43,6 +62,7 @@ async function createSale(
     last_name: string;
     disabled: boolean;
     administrator: boolean;
+    role?: string;
   },
 ) {
   const { data: sales, error: salesError } = await supabaseAdmin
@@ -127,11 +147,22 @@ async function updateSaleAvatar(user_id: string, avatar: string) {
 }
 
 async function inviteUser(req: Request, currentUserSale: any) {
-  const { email, password, first_name, last_name, disabled, administrator } =
-    await req.json();
+  const {
+    email,
+    password,
+    first_name,
+    last_name,
+    disabled,
+    administrator,
+    role,
+  } = await req.json();
 
   if (!currentUserSale.administrator) {
     return createErrorResponse(401, "Not Authorized");
+  }
+
+  if (!isValidRole(role)) {
+    return createErrorResponse(400, "Invalid role", { code: "invalid_role" });
   }
 
   const takenEmail = await findEmailUsedByAnotherSale(
@@ -192,6 +223,7 @@ async function inviteUser(req: Request, currentUserSale: any) {
         last_name,
         disabled,
         administrator,
+        role,
       });
 
       return new Response(
@@ -233,6 +265,7 @@ async function inviteUser(req: Request, currentUserSale: any) {
 
   try {
     await updateSaleDisabled(user.id, disabled);
+    await updateSaleRole(user.id, role);
     const sale = await updateSaleAdministrator(user.id, administrator);
 
     return new Response(
@@ -259,7 +292,13 @@ async function patchUser(req: Request, currentUserSale: any) {
     avatar,
     administrator,
     disabled,
+    role,
   } = await req.json();
+
+  if (!isValidRole(role)) {
+    return createErrorResponse(400, "Invalid role", { code: "invalid_role" });
+  }
+
   const { data: sale } = await supabaseAdmin
     .from("sales")
     .select("*")
@@ -388,6 +427,7 @@ async function patchUser(req: Request, currentUserSale: any) {
 
   try {
     await updateSaleDisabled(data.user.id, disabled);
+    await updateSaleRole(data.user.id, role);
     const sale = await updateSaleAdministrator(data.user.id, administrator);
     return new Response(
       JSON.stringify({

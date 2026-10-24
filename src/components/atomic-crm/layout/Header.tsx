@@ -72,13 +72,15 @@ const Header = () => {
                     to="/companies"
                     isActive={currentPath === "/companies"}
                   />
-                  <NavigationTab
-                    label={translate("resources.deals.name", {
-                      smart_count: 2,
-                    })}
-                    to="/deals"
-                    isActive={currentPath === "/deals"}
-                  />
+                  <CanAccess resource="deals" action="list">
+                    <NavigationTab
+                      label={translate("resources.deals.name", {
+                        smart_count: 2,
+                      })}
+                      to="/deals"
+                      isActive={currentPath === "/deals"}
+                    />
+                  </CanAccess>
                 </nav>
               </div>
               <div className="flex items-center">

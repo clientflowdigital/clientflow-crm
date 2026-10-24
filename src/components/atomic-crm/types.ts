@@ -25,12 +25,18 @@ export type SalesFormData = {
   last_name: string;
   administrator: boolean;
   disabled: boolean;
+  role?: SaleRole;
 };
+
+// Team users see everything; marketing users (freelance partners) only see
+// the companies assigned to them, and never deals or amounts.
+export type SaleRole = "team" | "marketing";
 
 export type Sale = {
   first_name: string;
   last_name: string;
   administrator: boolean;
+  role?: SaleRole;
   avatar?: RAFile;
   disabled?: boolean;
   user_id: string;
@@ -72,6 +78,7 @@ export type Company = {
   context_links?: string[];
   nb_contacts?: number;
   nb_deals?: number;
+  marketer_id?: Identifier | null;
 } & Pick<RaRecord, "id">;
 
 export type EmailAndType = {

@@ -1,5 +1,6 @@
 import { Globe, Linkedin, Phone } from "lucide-react";
 import {
+  CanAccess,
   useGetIdentity,
   useLocaleState,
   useRecordContext,
@@ -33,7 +34,9 @@ export const CompanyAside = ({ link = "edit" }: CompanyAsideProps) => {
     <div className="hidden sm:block w-92 min-w-92 space-y-4">
       <div className="flex flex-row space-x-1">
         {link === "edit" ? (
-          <EditButton label={translate("resources.companies.action.edit")} />
+          <CanAccess resource="companies" action="edit">
+            <EditButton label={translate("resources.companies.action.edit")} />
+          </CanAccess>
         ) : (
           <ShowButton label={translate("resources.companies.action.show")} />
         )}

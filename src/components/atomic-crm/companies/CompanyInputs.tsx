@@ -169,6 +169,14 @@ const CompanyAdditionalInformationInputs = () => {
       >
         <SelectInput helperText={false} optionText={saleOptionRenderer} />
       </ReferenceInput>
+      {/* The marketing partner is the only marketing user who sees this client */}
+      <ReferenceInput
+        source="marketer_id"
+        reference="sales"
+        filter={{ role: "marketing", "disabled@neq": true }}
+      >
+        <SelectInput helperText={false} optionText={saleOptionRenderer} />
+      </ReferenceInput>
     </div>
   );
 };
